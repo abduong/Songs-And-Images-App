@@ -26,7 +26,7 @@ app.static_folder = 'static'
 app.config['SECRET_KEY'] = 'hardtoguessstringfromsi364thisisnotsupersecurebutitsok'
 # app.config['SQLALCHEMY_DATABASE_URI'] =\
     # 'sqlite:///' + os.path.join(basedir, 'data.sqlite') # Determining where your database file will be stored, and what it will be called
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://localhost/songs_data" # TODO: decide what your new database name will be, and create it in postgresql, before running this new application (it's similar to an old one, but has some more to it)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL') #"postgresql://localhost/songs_data" # TODO: decide what your new database name will be, and create it in postgresql, before running this new application (it's similar to an old one, but has some more to it)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -39,6 +39,10 @@ app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_SUBJECT_PREFIX'] = '[Songs App]'
 app.config['MAIL_SENDER'] = 'Admin <youremail@example.com>' # TODO fill in email
 app.config['ADMIN'] = os.environ.get('ADMIN') or "Admin <youremail@example.com>"
+
+app.config['HEROKU_ON'] = os.environ.get('HEROKU')
+
+#app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://localhost/songs_data"
 
 
 # Set up Flask debug stuff
